@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muscle Therapy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      color: #e5dbc6;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #e5dbc6;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #c4b79d;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 100px 40px;
+      background: #111;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      letter-spacing: 4px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 600px;
+      color: #ccc;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 12px 28px;
+      border: 2px solid #e5dbc6;
+      background: transparent;
+      color: #e5dbc6;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #e5dbc6;
+      color: #0f0f0f;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      font-size: 14px;
+      background-color: #0f0f0f;
+    }
+
+    /* Floating Contact Button */
+    #contact-fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+    }
+
+    .fab-icon {
+      width: 56px;
+      height: 56px;
+      background-color: #e5dbc6;
+      color: #111;
+      font-size: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .fab-options {
+      display: none;
+      flex-direction: column;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .fab-options a {
+      margin-bottom: 12px;
+      background: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .fab-options a:hover {
+      transform: scale(1.1);
+    }
+
+    .fab-options img {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Contact Section (Location and Contact Info) */
+    .contact-info {
+      padding: 80px 40px;
+      background: #1a1a1a;
+      color: #e5dbc6;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact-info h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .contact-info p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info .location {
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 30px;
+    }
+    /* Анімація для заголовку */
+.hero h1 {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.hero p {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+.hero .btn {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+/* Анімація для кнопки */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Додаткові стилі для кнопки */
+.btn {
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #c4b79d;
+  color: #0f0f0f;
+}
+/* Анімація для тексту і фото */
+
+
+
+
+/* Анімація для тексту і фото */
+.card-content {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 2s; /* затримка для цього елемента після заголовку */
+}
+
+/* Анімація для фото */
+.card img {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 2.5s; /* затримка для фото */
+}
+
+/* Ключова анімація */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+body {
+      margin: 0;
+      background-color: #0f0f0f;
+      color: #e5dbc6;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .services-section {
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .services-section h1 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 40px;
+    }
+
+    .service-card {
+      display: flex;
+      justify-content: space-between;
+      background-color: #181818;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      margin-bottom: 40px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .service-card img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 8px;
+    }
+
+    .service-card-text {
+      flex: 1;
+      margin-left: 20px;
+      text-align: left;
+    }
+
+    .service-card h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .service-card p {
+      color: #ccc;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .service-card ul {
+      padding-left: 20px;
+      color: #b3a894;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      font-size: 14px;
+      background-color: #0f0f0f;
+    }
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      color: #e5dbc6;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .team-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .team-member {
+      display: flex;
+      background-color: #181818;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      width: 80%;
+      max-width: 1200px;
+      transition: all 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .team-member img {
+      border-radius: 8px;
+      width: 250px;
+      height: auto;
+      margin-right: 40px;
+    }
+
+    .team-member .text {
+      flex: 1;
+      text-align: left;
+      color: #fff;
+    }
+
+    .team-member h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .team-member p {
+      color: #ccc;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      font-size: 14px;
+      background-color: #0f0f0f;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Muscle Therapy</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/booking">Booking</a>
+      
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>THE PLACE TO HEAL & RECHARGE</h1>
+    <p>Experience deep relief and relaxation through massage, pilates, and guided personal exercises. Choose a service and book your session now.</p>
+    <a href="/booking"><button class="btn">Book a Session</button></a>
+  </section>
+
+  <section class="team-section">
+    <div class="team-member">
+      <img src="https://i.ibb.co/nsGJfnbK/photo1.jpg" alt="Natalia Rudin">
+      <div class="text">
+        <h2>Natalia Rudin</h2>
+        <p><strong>Sports Massage/Manual Therapist and Matwork Pilates Specialist</strong></p>
+        <p>I specialise in deep and sports massage therapy. I use a variety of superficial and deep stroke techniques, used to relax or invigorate muscle tissue. This focus work can encourage healing in the tissues following injury. It can also be used to adequately prepare muscles for sporting activity.</p>
+        <p>My main goals as a therapist are to help people who suffer in any way with aches or pains, and those that are unable to train in their specific sport, to get them back on their feet again with the correct guidance and the necessary treatment. I have a particular interest in improving posture through soft tissue release techniques and deep muscle work to penetrate and influence muscle imbalances stemming from the spine and the surrounding tissues.</p>
+        <p>In my pilates sessions, it will be all about you, your needs, and your goals. You’ll work at the level and pace that’s right for you, while personal attention and bespoke programming mean that you’ll progress further and faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <h1>Our Services</h1>
+
+    <div class="service-card">
+      <img src="https://i.ibb.co/DPqtLRVJ/photo2.jpg" alt="Massage Therapy" />
+      <div class="service-card-text">
+        <h2>Massage Therapy</h2>
+        <p>Release muscle tension in your back, shoulders, and neck with our therapeutic massages.</p>
+        <ul>
+          <li>30-minute session</li>
+          <li>60-minute session</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img src="https://i.ibb.co/xtZRDgSD/photo4.jpg" alt="Pilates" />
+      <div class="service-card-text">
+        <h2>Pilates</h2>
+        <p>Improve your posture, flexibility, and strength with guided pilates sessions.</p>
+        <ul>
+          <li>Great for recovery and injury prevention</li>
+          <li>Low-impact and joint-friendly</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <img src="https://i.ibb.co/JwztC5zq/photo3.jpg" alt="Beginner Fitness" />
+      <div class="service-card-text">
+        <h2>Beginner Fitness</h2>
+        <p>Programs tailored for those returning to activity after a long break.</p>
+        <ul>
+          <li>Focus on mobility and light strength</li>
+          <li>Personalized training pace</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  
+
+
+  <!-- Contact Info Section -->
+  <section class="contact-info">
+    <h2>Contact Us</h2>
+    <div class="location">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1982.093512705053!2d-0.1046789!3d51.5293415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b48f68c8a55%3A0x1234567890abcdef!2s123%20Therapy%20Street%2C%20London%2C%20UK!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <p>32 Tilletts Lane RH12 3RD-
+      36-37 Castle Street 
+      Guildford GU1 3UQ</p>
+    <p><strong>Phone:</strong> +380XXXXXXXXX</p>
+    <p><strong>Email:</strong> info@muscletherapy.com</p>
+
+    <a href="https://www.google.com/maps/place/36-37+Castle+St,+Guildford+GU1+3UQ,+Велика+Британія/@51.2345404,-0.5743071,279m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4875d090bc3e25f1:0xdadf2db5f9d23a0b!8m2!3d51.2345393!4d-0.5734694!16s%2Fg%2F11p17vc346?entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoASAFQAw%3D%3D" class="btn">Get Directions</a>
+  </section>
+
+  <div class="footer">
+    © 2025 Muscle Therapy. All rights reserved.
+  </div>
+
+  <!-- Floating Contact Button -->
+  <div id="contact-fab">
+    <div class="fab-icon" onclick="toggleContacts()">📞</div>
+    <div class="fab-options" id="fab-options">
+      <a href="https://t.me/yourusername" target="_blank" title="Telegram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+      </a>
+      <a href="https://wa.me/447939807081" target="_blank" title="WhatsApp">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank" title="Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+      </a>
+      <a href="tel:+447939807081" title="Call">
+        <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call">
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleContacts() {
+      const options = document.getElementById("fab-options");
+      options.style.display = options.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+
+</body>
+</html>

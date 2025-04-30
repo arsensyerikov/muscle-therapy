@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking | Muscle Therapy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      font-family: 'Montserrat', sans-serif;
+      color: #e5dbc6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #e5dbc6;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #c4b79d;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: #1a1a1a;
+      border-radius: 16px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #2e2e2e;
+      color: #fff;
+    }
+
+    .btn {
+      background-color: transparent;
+      border: 2px solid #e5dbc6;
+      color: #e5dbc6;
+      font-weight: bold;
+      padding: 12px 24px;
+      width: 100%;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #e5dbc6;
+      color: #0f0f0f;
+    }
+
+    .calendar-button {
+      text-align: center;
+      margin: 40px 0 -10px;
+    }
+
+    .calendar-button a {
+      text-decoration: none;
+      background-color: #e5dbc6;
+      color: #0f0f0f;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s;
+    }
+
+    /* Floating Contact Button */
+    #contact-fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+    }
+
+    .fab-icon {
+      width: 56px;
+      height: 56px;
+      background-color: #e5dbc6;
+      color: #111;
+      font-size: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .fab-options {
+      display: none;
+      flex-direction: column;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .fab-options a {
+      margin-bottom: 12px;
+      background: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .fab-options a:hover {
+      transform: scale(1.1);
+    }
+
+    .fab-options img {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Muscle Therapy</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/booking">Booking</a>
+      
+      <a href="/calendar">Calendar</a>
+    </nav>
+  </header>
+
+  <div class="calendar-button">
+    <a href="/calendar">View Calendar</a>
+  </div>
+
+  <div class="container">
+    <h2>Book a Session</h2>
+    <form method="POST" action="/booking">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" required />
+
+      <label for="service">Select Service</label>
+      <select id="service" name="service" required>
+        <option value="">-- Choose a service --</option>
+        <option value="30-minute massage">30-minute massage</option>
+        <option value="60-minute massage">60-minute massage</option>
+        <option value="Pilates session">Pilates session</option>
+        <option value="Beginner fitness">Beginner fitness</option>
+      </select>
+
+      <label for="date">Preferred Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="time">Preferred Time</label>
+      <input type="time" id="time" name="time" required />
+
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+
+  <!-- Floating Contact Button -->
+  <div id="contact-fab">
+    <div class="fab-icon" onclick="toggleContacts()">📞</div>
+    <div class="fab-options" id="fab-options">
+      <a href="https://t.me/yourusername" target="_blank" title="Telegram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+      </a>
+      <a href="https://wa.me/447939807081" target="_blank" title="WhatsApp">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+      </a>
+      <a href="https://instagram.com/yourprofile" target="_blank" title="Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+      </a>
+      <a href="tel:+447939807081" title="Call">
+        <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call">
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleContacts() {
+      const options = document.getElementById("fab-options");
+      options.style.display = options.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+
+</body>
+</html>
