@@ -82,6 +82,10 @@ def calendar():
 
     return render_template("calendar.html", events=json.dumps(events))
 
+import os
+
+if not os.path.exists("database.db"):
+    import init_db  # створює базу
 
 # Запуск
 if __name__ == "__main__":
