@@ -5,17 +5,17 @@ import datetime
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"
 
-# Головна
+# Головна сторінка
 @app.route("/")
 def index():
     return render_template("index.html")
 
-# Послуги
+# Сторінка послуг
 @app.route("/services")
 def services():
     return render_template("services.html")
 
-# Бронювання
+# Сторінка бронювання
 @app.route("/booking", methods=["GET", "POST"])
 def booking():
     if request.method == "POST":
@@ -26,23 +26,38 @@ def booking():
         date = request.form["date"]
         time = request.form["time"]
 
-        conn = sqlite3.connect("database.db")
-        c = conn.cursor()
-        c.execute("INSERT INTO bookings (name, email, phone, service, date, time) VALUES (?, ?, ?, ?, ?, ?)",
-                  (name, email, phone, service, date, time))
-        conn.commit()
-        conn.close()
+        try:
+            conn = sqlite3.connect("database.db")
+            c = conn.cursor()
+
+            # Перевірка на зайнятість
+            c.execute("SELECT * FROM bookings WHERE date = ? AND time = ?", (date, time))
+            existing = c.fetchone()
+
+            if existing:
+                flash("❌ This date and time is already booked!", "error")
+            else:
+                c.execute("""
+                    INSERT INTO bookings (name, email, phone, service, date, time)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, (name, email, phone, service, date, time))
+                conn.commit()
+                flash("✅ Booking successfully submitted!", "success")
+
+            conn.close()
+        except Exception as e:
+            flash("❌ Error while saving booking: " + str(e), "error")
 
         return redirect("/booking")
 
     return render_template("booking.html")
 
-# Локація
+# Сторінка локації
 @app.route("/location")
 def location():
     return render_template("location.html")
 
-# Календар
+# Календар бронювань
 @app.route("/calendar")
 def calendar():
     conn = sqlite3.connect("database.db")
@@ -55,9 +70,8 @@ def calendar():
 
     for row in rows:
         try:
-            # Якщо дата вже у форматі YYYY-MM-DD (від input[type="date"]) — одразу використовуємо
-            date_str = row[1]  # напр. '2025-04-30'
-            datetime.datetime.strptime(date_str, "%Y-%m-%d")  # валідація
+            date_str = row[1]  # очікуємо формат YYYY-MM-DD
+            datetime.datetime.strptime(date_str, "%Y-%m-%d")  # перевірка
             events.append({
                 "title": f"Booked: {row[0]}",
                 "start": date_str,

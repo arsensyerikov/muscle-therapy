@@ -14,6 +14,7 @@
       background-color: #0f0f0f;
       color: #e5dbc6;
     }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -21,11 +22,13 @@
       padding: 20px 60px;
       border-bottom: 1px solid #2c2c2c;
     }
+
     .logo {
       font-size: 24px;
       font-weight: 800;
       color: #fff;
     }
+
     nav a {
       margin: 0 20px;
       text-decoration: none;
@@ -33,20 +36,24 @@
       font-weight: 500;
       transition: color 0.3s;
     }
+
     nav a:hover {
       color: #c4b79d;
     }
+
     .container {
       max-width: 900px;
       margin: 60px auto;
       padding: 0 20px;
     }
+
     #calendar {
       background-color: #fff;
       color: #111;
       border-radius: 12px;
       padding: 20px;
     }
+
     .footer {
       text-align: center;
       padding: 40px;
@@ -54,7 +61,6 @@
       color: #777;
     }
 
-    /* Floating Contact Button */
     #contact-fab {
       position: fixed;
       bottom: 30px;
@@ -105,6 +111,21 @@
       width: 24px;
       height: 24px;
     }
+
+    /* 🟡 Hover Zoom Effect for Events */
+    .fc-event {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .fc-event:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -115,7 +136,6 @@
       <a href="/">Home</a>
       <a href="/services">Services</a>
       <a href="/booking">Booking</a>
-      
       <a href="/calendar">Calendar</a>
     </nav>
   </header>
@@ -129,7 +149,6 @@
     © 2025 Muscle Therapy. All rights reserved.
   </div>
 
-  <!-- Floating Contact Button -->
   <div id="contact-fab">
     <div class="fab-icon" onclick="toggleContacts()">📞</div>
     <div class="fab-options" id="fab-options">
@@ -164,7 +183,10 @@
           center: 'title',
           right: ''
         },
-        events: {{ events|safe }}
+        events: {{ events|safe }},
+        eventDidMount: function(info) {
+          info.el.style.cursor = 'pointer';
+        }
       });
       calendar.render();
     });

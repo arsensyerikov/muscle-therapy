@@ -102,7 +102,6 @@
       transition: background 0.3s;
     }
 
-    /* Floating Contact Button */
     #contact-fab {
       position: fixed;
       bottom: 30px;
@@ -163,7 +162,6 @@
       <a href="/">Home</a>
       <a href="/services">Services</a>
       <a href="/booking">Booking</a>
-      
       <a href="/calendar">Calendar</a>
     </nav>
   </header>
@@ -174,6 +172,20 @@
 
   <div class="container">
     <h2>Book a Session</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div style="margin-bottom: 20px;">
+          {% for category, message in messages %}
+            <div style="padding: 12px 20px; border-radius: 8px; margin-bottom: 10px;
+                    color: {{ 'black' if category == 'success' else '#fff' }};
+                    background-color: {{ '#d4edda' if category == 'success' else '#e74c3c' }};
+                    font-weight: 600;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     <form method="POST" action="/booking">
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" required />
@@ -187,8 +199,8 @@
       <label for="service">Select Service</label>
       <select id="service" name="service" required>
         <option value="">-- Choose a service --</option>
-        <option value="30-minute massage">30-minute massage</option>
-        <option value="60-minute massage">60-minute massage</option>
+        <option value="Deep Tissue Massage - 30 mins (£30)">Deep Tissue Massage — 30 mins (£30)</option>
+        <option value="Deep Tissue Massage - 60 mins (£55)">Deep Tissue Massage — 60 mins (£55)</option>
         <option value="Pilates session">Pilates session</option>
         <option value="Beginner fitness">Beginner fitness</option>
       </select>
@@ -203,7 +215,6 @@
     </form>
   </div>
 
-  <!-- Floating Contact Button -->
   <div id="contact-fab">
     <div class="fab-icon" onclick="toggleContacts()">📞</div>
     <div class="fab-options" id="fab-options">
