@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, redirect, flash, json
 import sqlite3
 import datetime
+import os
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"
+
+# 🔧 Створити БД, якщо її ще нема
+if not os.path.exists("database.db"):
+    import init_db  # викликає файл init_db.py для створення бази
 
 # Головна сторінка
 @app.route("/")
@@ -70,8 +75,8 @@ def calendar():
 
     for row in rows:
         try:
-            date_str = row[1]  # очікуємо формат YYYY-MM-DD
-            datetime.datetime.strptime(date_str, "%Y-%m-%d")  # перевірка
+            date_str = row[1]
+            datetime.datetime.strptime(date_str, "%Y-%m-%d")
             events.append({
                 "title": f"Booked: {row[0]}",
                 "start": date_str,
@@ -81,11 +86,6 @@ def calendar():
             print("❌ Skip invalid date:", row, "| Error:", e)
 
     return render_template("calendar.html", events=json.dumps(events))
-
-import os
-
-if not os.path.exists("database.db"):
-    import init_db  # створює базу
 
 # Запуск
 if __name__ == "__main__":
